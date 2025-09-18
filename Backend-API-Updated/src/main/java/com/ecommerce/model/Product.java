@@ -1,9 +1,12 @@
+// Database Schema for the collection - products
 package com.ecommerce.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
+// Validation - checking the user input
+// Header Files for Validation
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,8 +17,9 @@ public class Product {
 
     @Id
     private String id;
-
+    // @NotBlank checks whether user has given the input or not
     @NotBlank(message = "Product name cannot be empty")
+    // @Size checks the min(character length) and max size of the input
     @Size(min = 2, max = 50, message = "Product name must be between 2 and 50 characters")
     private String name;
 
@@ -25,14 +29,18 @@ public class Product {
     @NotBlank(message = "Category is required")
     private String category;
 
+    // @NotBlank refers to Strings
+    // @NotNull refers to Numbers (int, float, double)
     @NotNull(message = "Price cannot be null")
     @Min(value = 1, message = "Price must be greater than 0")
     private Double price;
 
+    // @Min refers to minimum value not character
     @NotNull(message = "Stock cannot be null")
     @Min(value = 0, message = "Stock cannot be negative")
     private Integer stock;
     
+    // No restrictions that means it is Optional
     private List<String> tags;
 
     // Default Constructor

@@ -1,8 +1,12 @@
 package com.ecommerce.service;
 
-import com.ecommerce.exception.ProductNotFoundException;
+// Importing the model
 import com.ecommerce.model.Product;
+// Importing the repository
 import com.ecommerce.repository.ProductRepository;
+// Importing the exception
+import com.ecommerce.exception.ProductNotFoundException;
+// Importing the Logger
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,7 @@ import java.util.List;
 @Service
 public class ProductService {
 
+    // declare the logger to use it later 
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
     private final ProductRepository repo;
 
@@ -19,6 +24,8 @@ public class ProductService {
         this.repo = repo;
     }
 
+    // MongoRepository helps us to use methods like: findAll(), findById(), deleteById(), save(), existsById()
+    // logger will provide different methods like: info(), warn(), error(), success()
     public List<Product> getAllProducts() {
         logger.info("Fetching all products");
         return repo.findAll();
@@ -28,7 +35,9 @@ public class ProductService {
         logger.info("Fetching product with id {}", id);
         return repo.findById(id)
                 .orElseThrow(() -> {
+                    // Catching/Handling the error and showing the relevant message
                     logger.error("Product not found with id {}", id);
+                    // Error is handled using Exception - ProductNotFoundException
                     return new ProductNotFoundException(id);
                 });
     }
