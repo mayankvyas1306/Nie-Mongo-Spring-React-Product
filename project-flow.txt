@@ -1,0 +1,59 @@
+Go to the website:
+https://start.spring.io/
+
+Select Project Metadata:
+
+Project - Maven
+Language - Java
+Spring Boot - 3.5.5
+Project Metadata
+Group: com.{any-name}
+Artifact: com.{any-name}​
+Name: {any-name}
+Description: {Describe about the project}
+Package name: com.{any-name}
+
+Dependencies:
+
+Spring Web
+Spring Data MongoDB
+
+Click on Generate Button, it will download the starter project in a Zip file
+
+Extract the zip file in your respective folder
+
+Open in VS code
+
+Navigate to src/main/resources/application.properties and configure the MongoDB credentials
+    Add Mongo-Atlas String connection
+    Add DB name
+    Add Port Number (8080)
+
+Make new folders:
+Navigate to src/main/java/com/package_name
+    model
+    repository
+    service
+    controller
+    dto (optional)
+    exception (optional)
+
+Make new files in the respective folders:
+Syntax: {ModuleName}.java
+Ex: ModuleName - Product, User, Order, Review
+
+    model - Product.java
+    repository - ProductRepository.java
+    service - ProductService.java
+    controller - ProductController.java
+
+Complete the Database layer (DB scheme) for the Module (Product) in Product.java file
+Complete the Repository layer for the Product in ProductRepository.java file
+Complete the Service layer for the Product in ProductService.java file
+Complete the Controller layer for the Product in ProductController.java file
+
+Add the additional dependency in the pom.xml file:
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
