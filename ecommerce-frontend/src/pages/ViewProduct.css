@@ -1,0 +1,154 @@
+/* Using the same page container from previous components */
+.page-container {
+  min-height: calc(100vh - 70px);
+  background-color: #0f172a;
+  color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  padding: 24px;
+}
+
+.content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Using the same page header from previous components */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Reusing button styles */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  display: inline-block;
+}
+.btn-primary { background-color: #ffc107; color: #0d47a1; }
+.btn-primary:hover { background-color: #ffca28; transform: translateY(-2px); }
+.btn-secondary { background-color: #334155; color: #f8fafc; }
+.btn-secondary:hover { background-color: #475569; }
+.btn-warning { background-color: #f59e0b; color: #fff; }
+.btn-warning:hover { background-color: #facc15; }
+
+/* Main card for displaying product details */
+.product-details-card {
+  background-color: #1e293b; /* Slate 800 */
+  border: 1px solid #334155; /* Slate 700 */
+  border-radius: 12px;
+  padding: 32px;
+  animation: scaleUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Re-using the same animation */
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.product-header {
+  border-bottom: 1px solid #334155;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.product-header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.product-category {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #94a3b8; /* Slate 400 */
+  background-color: #334155;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* Section for Price and Stock */
+.product-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.meta-item .meta-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.meta-item p {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f8fafc;
+  margin: 0;
+}
+
+/* General section styling */
+.product-section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #334155;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.product-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* Styling for tags */
+.product-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-badge {
+  background-color: #475569; /* Slate 600 */
+  color: #e2e8f0; /* Slate 200 */
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.no-tags {
+  color: #64748b; /* Slate 500 */
+  font-style: italic;
+}
+
+/* Consistent status message styling */
+.status-message {
+  text-align: center;
+  padding-top: 5rem;
+}
+.status-message h3, .status-message h4 {
+    margin-bottom: 1rem;
+}

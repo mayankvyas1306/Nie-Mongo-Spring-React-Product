@@ -1,75 +1,104 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./Profile.css"; // Import the new CSS file
 
 function Profile() {
   const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState(null);
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if (userId) {
       axios.get(`http://localhost:8080/users/${userId}`)
         .then((res) => {
-          setUser(res.data);          // full user
-          setProfile(res.data.profile || {}); // nested profile
+          setUser(res.data);
         })
         .catch((err) => {
-          console.error(err);
+          console.error("Failed to load profile:", err);
           alert("Failed to load profile");
         });
     }
   }, [userId]);
 
+  // A helper to get the profile object safely
+  const profile = user?.profile || {};
+
+  // Display a message if the user is not logged in
   if (!userId) {
-    return <h3 className="text-center mt-4">Please login first</h3>;
+    return (
+      <div className="profile-container status-message">
+        <h3>Please log in to view your profile.</h3>
+        <Link to="/login" className="edit-profile-btn">Go to Login</Link>
+      </div>
+    );
   }
 
-  if (!user || !profile) {
-    return <h4 className="text-center mt-4">Loading profile...</h4>;
+  // Display a loading state while fetching data
+  if (!user) {
+    return (
+      <div className="profile-container status-message">
+        <h4>Loading profile...</h4>
+      </div>
+    );
   }
 
   return (
-    <div className="container mt-4">
-      <h2 className="text-center mb-4">My Profile</h2>
+    <div className="profile-container">
+      <div className="profile-card">
+        {/* Profile Header */}
+        <div className="profile-header">
+          <div className="avatar-placeholder">
+            <span>{user.username ? user.username.charAt(0).toUpperCase() : "U"}</span>
+          </div>
+          <div className="user-info">
+            <h2>{user.username || "N/A"}</h2>
+            <p>{user.email || "N/A"}</p>
+          </div>
+        </div>
 
-      <div className="row">
-        {/* Basic Details */}
-        <div className="col-md-6 mb-3">
-          <div className="card shadow-sm h-100">
-            <div className="card-header bg-primary text-white">
-              <h5 className="mb-0">Basic Details</h5>
+        {/* Profile Body */}
+        <div className="profile-body">
+          {/* Basic Details Section */}
+          <div className="detail-section">
+            <h3>Basic Details</h3>
+            <div className="detail-item">
+              <span>Phone</span>
+              <p>{user.phone || "Not provided"}</p>
             </div>
-            <div className="card-body">
-              <p><strong>Name:</strong> {user.username || "N/A"}</p>
-              <p><strong>Email:</strong> {user.email || "N/A"}</p>
-              <p><strong>Phone:</strong> {user.phone || "N/A"}</p>
+          </div>
+
+          {/* Address Details Section */}
+          <div className="detail-section">
+            <h3>Address</h3>
+            <div className="detail-item">
+              <span>Street</span>
+              <p>{profile.street || "Not provided"}</p>
+            </div>
+            <div className="detail-item">
+              <span>City</span>
+              <p>{profile.city || "Not provided"}</p>
+            </div>
+             <div className="detail-item">
+              <span>Landmark</span>
+              <p>{profile.landmark || "Not provided"}</p>
+            </div>
+            <div className="detail-item">
+              <span>Pincode</span>
+              <p>{profile.pincode || "Not provided"}</p>
+            </div>
+            <div className="detail-item">
+              <span>Additional Info</span>
+              <p>{profile.additionalInfo || "None"}</p>
             </div>
           </div>
         </div>
 
-        {/* Address Details */}
-        <div className="col-md-6 mb-3">
-          <div className="card shadow-sm h-100">
-            <div className="card-header bg-secondary text-white">
-              <h5 className="mb-0">Address Details</h5>
-            </div>
-            <div className="card-body">
-              <p><strong>Street:</strong> {profile.street || "N/A"}</p>
-              <p><strong>Landmark:</strong> {profile.landmark || "N/A"}</p>
-              <p><strong>City:</strong> {profile.city || "N/A"}</p>
-              <p><strong>Pincode:</strong> {profile.pincode || "N/A"}</p>
-              <p><strong>Additional Info:</strong> {profile.additionalInfo || "N/A"}</p>
-            </div>
-          </div>
+        {/* Action Button */}
+        <div className="profile-actions">
+          <Link to="/update-profile" className="edit-profile-btn">
+            ✏️ Edit Profile
+          </Link>
         </div>
-      </div>
-
-      {/* Edit Button */}
-      <div className="text-center mt-3">
-        <Link to="/update-profile" className="btn btn-warning">
-          ✏️ Edit Profile
-        </Link>
       </div>
     </div>
   );

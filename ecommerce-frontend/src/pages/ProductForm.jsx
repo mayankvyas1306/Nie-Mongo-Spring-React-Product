@@ -1,95 +1,100 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./ProductForm.css"; // Import the new, final stylesheet
 
-function ProductForm({ initialData = {}, onSubmit }) {
-  const [name, setName] = useState(initialData.name || "");
-  const [description, setDescription] = useState(initialData.description || "");
-  const [category, setCategory] = useState(initialData.category || "");
-  const [price, setPrice] = useState(initialData.price || "");
-  const [stock, setStock] = useState(initialData.stock || "");
-  const [tags, setTags] = useState(initialData.tags || []);
+function ProductForm({ initialData = {}, onSubmit, isEditing }) {
+  const [product, setProduct] = useState({
+    name: initialData.name || "",
+    description: initialData.description || "",
+    category: initialData.category || "",
+    price: initialData.price || "",
+    stock: initialData.stock || "",
+    tags: initialData.tags || [],
+  });
   const [tagInput, setTagInput] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProduct(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleAddTag = (e) => {
     e.preventDefault();
-    if (tagInput.trim() !== "" && !tags.includes(tagInput.trim())) {
-      setTags([...tags, tagInput.trim()]);
+    if (tagInput.trim() !== "" && !product.tags.includes(tagInput.trim())) {
+      setProduct(prev => ({ ...prev, tags: [...prev.tags, tagInput.trim()] }));
       setTagInput("");
     }
   };
 
   const handleRemoveTag = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove));
+    setProduct(prev => ({ ...prev, tags: prev.tags.filter((tag) => tag !== tagToRemove) }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Prepare data for submission
     const productData = {
-      name,
-      description,
-      category,
-      price: parseFloat(price),
-      stock: parseInt(stock, 10),
-      tags,
+      ...product,
+      price: parseFloat(product.price) || 0,
+      stock: parseInt(product.stock, 10) || 0,
     };
     onSubmit(productData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded bg-light">
-      <h4 className="mb-3">{initialData.id ? "Edit Product" : "Add Product"}</h4>
-
-      <div className="mb-3">
-        <label className="form-label">Name</label>
-        <input type="text" className="form-control" value={name}
-          onChange={(e) => setName(e.target.value)} required />
+    <form onSubmit={handleSubmit} className="product-form">
+      {/* Name Input */}
+      <div className="form-group">
+        <label className="form-label" htmlFor="name">Product Name *</label>
+        <input id="name" name="name" type="text" className="form-input" value={product.name} onChange={handleChange} required />
       </div>
 
-      <div className="mb-3">
-        <label className="form-label">Description</label>
-        <textarea className="form-control" value={description}
-          onChange={(e) => setDescription(e.target.value)} required />
+      {/* Description Input */}
+      <div className="form-group">
+        <label className="form-label" htmlFor="description">Description</label>
+        <textarea id="description" name="description" className="form-textarea" value={product.description} onChange={handleChange} />
       </div>
 
-      <div className="mb-3">
-        <label className="form-label">Category</label>
-        <input type="text" className="form-control" value={category}
-          onChange={(e) => setCategory(e.target.value)} required />
+      {/* Category, Price, and Stock in a grid layout */}
+      <div className="form-grid">
+        <div className="form-group">
+          <label className="form-label" htmlFor="category">Category *</label>
+          <input id="category" name="category" type="text" className="form-input" value={product.category} onChange={handleChange} required />
+        </div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="price">Price (₹) *</label>
+          <input id="price" name="price" type="number" className="form-input" value={product.price} onChange={handleChange} required />
+        </div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="stock">Stock *</label>
+          <input id="stock" name="stock" type="number" className="form-input" value={product.stock} onChange={handleChange} required />
+        </div>
       </div>
 
-      <div className="mb-3">
-        <label className="form-label">Price</label>
-        <input type="number" className="form-control" value={price}
-          onChange={(e) => setPrice(e.target.value)} required />
-      </div>
-
-      <div className="mb-3">
-        <label className="form-label">Stock</label>
-        <input type="number" className="form-control" value={stock}
-          onChange={(e) => setStock(e.target.value)} required />
-      </div>
-
-      <div className="mb-3">
+      {/* Tags Input */}
+      <div className="form-group">
         <label className="form-label">Tags</label>
-        <div className="d-flex">
-          <input type="text" className="form-control me-2"
-            value={tagInput} onChange={(e) => setTagInput(e.target.value)}
-            placeholder="Type a tag and press Add" />
+        <div className="tag-input-wrapper">
+          <input type="text" className="form-input" value={tagInput} onChange={(e) => setTagInput(e.target.value)} placeholder="e.g., electronics, featured" />
           <button className="btn btn-secondary" onClick={handleAddTag}>Add</button>
         </div>
-        <div className="mt-2">
-          {tags.map((tag, i) => (
-            <span key={i} className="badge bg-info me-2">
+        <div className="tag-list">
+          {product.tags.map((tag, i) => (
+            <div key={i} className="tag-item">
               {tag}
-              <button type="button" className="btn-close btn-close-white btn-sm ms-2"
-                onClick={() => handleRemoveTag(tag)}></button>
-            </span>
+              <button type="button" className="remove-tag-btn" onClick={() => handleRemoveTag(tag)}> &times; </button>
+            </div>
           ))}
         </div>
       </div>
 
-      <button type="submit" className="btn btn-primary w-100">
-        {initialData.id ? "Update Product" : "Save Product"}
-      </button>
+      {/* Form Actions */}
+      <div className="form-actions">
+        <Link to="/products" className="btn btn-secondary">Cancel</Link>
+        <button type="submit" className="btn btn-primary">
+          {isEditing ? "Update Product" : "Save Product"}
+        </button>
+      </div>
     </form>
   );
 }

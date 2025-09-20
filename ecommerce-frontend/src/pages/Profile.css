@@ -1,0 +1,158 @@
+/* Import the same font for consistency */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Main container with matching dark background */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align card to the top */
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background-color: #0f172a; /* Slate 900 */
+  padding: 40px 20px;
+  color: #f8fafc; /* Slate 50 */
+}
+
+/* Central profile card with animations and modern styling */
+.profile-card {
+  width: 100%;
+  max-width: 700px;
+  background-color: #1e293b; /* Slate 800 */
+  border-radius: 12px;
+  border: 1px solid #334155; /* Slate 700 */
+  overflow: hidden; /* Ensures child elements conform to border radius */
+  animation: scaleUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Re-using the same animation from the login page */
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Header section with avatar and user info */
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 24px 32px;
+  background-color: #334155; /* Slate 700 */
+  border-bottom: 1px solid #475569; /* Slate 600 */
+}
+
+.avatar-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #38bdf8; /* Sky 400 */
+  color: #0f172a; /* Slate 900 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+.user-info h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.user-info p {
+  font-size: 16px;
+  color: #94a3b8; /* Slate 400 */
+  margin: 0;
+}
+
+/* Main body for profile details */
+.profile-body {
+  padding: 16px 32px 32px;
+}
+
+.detail-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #334155; /* Slate 700 */
+}
+.detail-section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+
+.detail-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #cbd5e1; /* Slate 300 */
+  margin-bottom: 16px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 16px;
+  border-bottom: 1px solid #334155; /* Slate 700 */
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-item span {
+  color: #94a3b8; /* Slate 400 - for the label */
+  font-weight: 500;
+}
+
+.detail-item p {
+  color: #f8fafc; /* Slate 50 - for the value */
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Action button area */
+.profile-actions {
+  padding: 24px 32px;
+  text-align: right;
+  background-color: #152033; /* A slightly darker shade */
+  border-top: 1px solid #334155; /* Slate 700 */
+}
+
+.edit-profile-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #38bdf8; /* Sky 400 */
+  color: #0f172a; /* Slate 900 */
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.edit-profile-btn:hover {
+  background-color: #7dd3fc; /* Sky 300 */
+  transform: translateY(-2px);
+}
+
+/* Styling for loading/error messages */
+.status-message {
+  text-align: center;
+  width: 100%;
+  align-self: center; /* Center vertically within flex container */
+}
+
+.status-message h3, .status-message h4 {
+    margin-bottom: 20px;
+}

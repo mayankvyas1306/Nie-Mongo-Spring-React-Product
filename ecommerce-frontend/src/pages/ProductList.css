@@ -1,0 +1,201 @@
+/* Import the consistent font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* Main page container with dark background */
+.page-container {
+  min-height: calc(100vh - 70px); /* Full height minus navbar */
+  background-color: #0f172a; /* Slate 900 */
+  color: #f8fafc; /* Slate 50 */
+  font-family: 'Inter', sans-serif;
+  padding: 24px;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header section with title and "Add" button */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+  gap: 16px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* --- Base Button Styles --- */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Primary button (e.g., Add Product) */
+.btn-primary {
+  background-color: #ffc107; /* Yellow from navbar */
+  color: #0d47a1; /* Blue from navbar */
+}
+.btn-primary:hover {
+  background-color: #ffca28;
+  transform: translateY(-2px);
+}
+
+/* Table container with a modern card-like feel */
+.table-container {
+  background-color: #1e293b; /* Slate 800 */
+  border: 1px solid #334155; /* Slate 700 */
+  border-radius: 12px;
+  padding: 16px;
+  overflow-x: auto; /* Ensures table is scrollable on small screens */
+}
+
+/* Main table styling */
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table thead {
+  background-color: #334155; /* Slate 700 */
+}
+
+.products-table th {
+  padding: 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #cbd5e1; /* Slate 300 */
+  border-bottom: 2px solid #475569; /* Slate 600 */
+}
+
+.products-table tbody td:first-child {
+  max-width: 350px; /* Adjust this value as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.products-table tbody tr {
+  border-bottom: 1px solid #334155; /* Slate 700 */
+  transition: background-color 0.2s ease;
+}
+
+.products-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.products-table tbody tr:hover {
+  background-color: #334155; /* Slate 700 */
+}
+
+.products-table td {
+  padding: 16px;
+  color: #f8fafc; /* Slate 50 */
+}
+
+/* Action buttons inside the table */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.action-buttons .btn {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+.btn-secondary { background-color: #475569; /* Slate 600 */ }
+.btn-secondary:hover { background-color: #64748b; /* Slate 500 */ }
+
+.btn-warning { background-color: #f59e0b; /* Amber 500 */ }
+.btn-warning:hover { background-color: #facc15; /* Amber 400 */ }
+
+.btn-danger { background-color: #dc2626; /* Red 600 */ }
+.btn-danger:hover { background-color: #ef4444; /* Red 500 */ }
+
+/* Loading and empty state messages */
+.loading-message,
+.no-products-message {
+  text-align: center;
+  padding: 48px;
+  color: #94a3b8; /* Slate 400 */
+}
+.no-products-message h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+/* Responsive adjustments for the table on mobile */
+@media screen and (max-width: 768px) {
+  .products-table thead {
+    display: none; /* Hide table header on mobile */
+  }
+  .products-table, .products-table tbody, .products-table tr, .products-table td {
+    display: block;
+    width: 100%;
+  }
+  .products-table tr {
+    margin-bottom: 16px;
+    border: 1px solid #334155;
+    border-radius: 8px;
+  }
+  .products-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid #334155;
+  }
+  .products-table td:last-child {
+      border-bottom: none;
+  }
+  .products-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    width: calc(50% - 32px);
+    text-align: left;
+    font-weight: 600;
+    color: #94a3b8; /* Slate 400 */
+  }
+  .action-buttons {
+      justify-content: flex-end;
+  }
+}
+
+.confirm-toast {
+  color: #fff;
+}
+
+.confirm-toast h6 {
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0 0 8px 0;
+}
+
+.confirm-toast p {
+  font-size: 0.9rem;
+  margin: 0 0 16px 0;
+  opacity: 0.9;
+}
+
+.confirm-toast-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}

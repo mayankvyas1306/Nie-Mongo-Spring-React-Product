@@ -1,0 +1,32 @@
+/* Using the same page container from previous components */
+.page-container {
+  min-height: calc(100vh - 70px);
+  background-color: #0f172a;
+  color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  padding: 24px;
+}
+
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Using the same page header from previous components */
+.page-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #334155;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Consistent status message styling */
+.status-message {
+  text-align: center;
+  padding-top: 5rem;
+}

@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "./Signup.css"; // Import the new CSS file
 
 function Signup() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,82 +14,64 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     if (!username || !email || !password || !phone) {
-      alert("All fields are required");
+      toast.error("All fields are required");
       return;
     }
 
-    try {
-      const res = await axios.post("http://localhost:8080/users", {
+    toast.promise(
+      axios.post("http://localhost:8080/users", {
         username,
         email,
         password,
         phone,
-      });
-      alert(`Account created for ${res.data.username}`);
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setPhone("");
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || "Signup failed");
-    }
+      }),
+      {
+        pending: 'Creating your account...',
+        success: {
+          render({ data }) {
+            // After successful signup, navigate to the login page
+            navigate("/");
+            return `Account created for ${data.data.username}! Please log in.`;
+          }
+        },
+        error: {
+          render({ data }) {
+            // Display specific error message from the backend if available
+            return data.response?.data?.message || "Signup failed. Please try again.";
+          }
+        }
+      }
+    );
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="card shadow-lg p-4" style={{ width: "450px" }}>
-        <h3 className="text-center mb-4">Create Account ✨</h3>
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h2>Create an Account</h2>
+          <p>Join us to start managing your products and orders.</p>
+        </div>
         <form onSubmit={handleSignup}>
-          <div className="mb-3">
-            <label className="form-label">Username</label>
-            <input
-              type="text"
-              className="form-control rounded-pill"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
-            />
+          <div className="input-group">
+            <label htmlFor="username">Username</label>
+            <input id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Choose a username" required />
           </div>
-          <div className="mb-3">
-            <label className="form-label">Email</label>
-            <input
-              type="email"
-              className="form-control rounded-pill"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
-            />
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="name@company.com" required />
           </div>
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control rounded-pill"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-            />
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Create a password" required />
           </div>
-          <div className="mb-3">
-            <label className="form-label">Phone</label>
-            <input
-              type="text"
-              className="form-control rounded-pill"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Enter phone number"
-            />
+          <div className="input-group">
+            <label htmlFor="phone">Phone Number</label>
+            <input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter your phone number" required />
           </div>
-          <button type="submit" className="btn btn-success w-100 rounded-pill">
-            Sign Up
-          </button>
+          <button type="submit" className="auth-button">Sign Up</button>
         </form>
-        <p className="text-center mt-3">
-          Already have an account?{" "}
-          <a href="/login" className="text-decoration-none">
-            Login
-          </a>
+        <p className="auth-link">
+          Already have an account? <Link to="/">Log in</Link>
         </p>
       </div>
     </div>

@@ -1,0 +1,153 @@
+/* Using the consistent page layout */
+.page-container {
+  min-height: calc(100vh - 70px);
+  background-color: #0f172a;
+  color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  padding: 24px;
+}
+.content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.page-header {
+  margin-bottom: 24px;
+}
+
+/* --- The main invoice card --- */
+.invoice-card {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 32px 40px;
+  animation: scaleUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Re-using the animation */
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Invoice Header: Title, Order ID, and Status */
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+.invoice-header h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1;
+}
+.invoice-header p {
+  margin: 8px 0 0 0;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+/* Reusing the status badge from the Orders page */
+.order-status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.status-pending { background-color: #f59e0b; color: #fff; }
+.status-shipped { background-color: #38bdf8; color: #0f172a; }
+.status-delivered { background-color: #22c55e; color: #fff; }
+.status-cancelled { background-color: #ef4444; color: #fff; }
+.status-default { background-color: #64748b; color: #fff; }
+
+/* Meta Info: Date and Total */
+.invoice-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+.invoice-meta span {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+.invoice-meta p {
+    margin: 4px 0 0 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.invoice-meta .total-prominent {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #38bdf8;
+}
+
+/* --- Table for Order Items --- */
+.invoice-table-container {
+  overflow-x: auto;
+}
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 32px;
+}
+.invoice-table thead {
+  border-bottom: 2px solid #475569;
+}
+.invoice-table th {
+  padding: 12px 0;
+  text-align: left;
+  color: #94a3b8;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+.invoice-table tbody tr {
+  border-bottom: 1px solid #334155;
+}
+.invoice-table td {
+  padding: 16px 0;
+  color: #f8fafc;
+}
+.invoice-table th:last-child, .invoice-table td:last-child {
+  text-align: right;
+}
+
+/* --- Totals Section --- */
+.invoice-totals {
+  width: 50%;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  color: #cbd5e1;
+}
+.total-row.grand-total {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  border-top: 2px solid #475569;
+  padding-top: 12px;
+  margin-top: 8px;
+}
+
+/* Reusing button and status message styles */
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.btn-primary { background-color: #ffc107; color: #0d47a1; }
+.btn-secondary { background-color: #334155; color: #f8fafc; border: none;}
+.status-message { text-align: center; padding-top: 5rem; }

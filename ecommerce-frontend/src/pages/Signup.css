@@ -1,0 +1,118 @@
+/* Using a shared name for the container for consistency */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background-color: #0f172a; /* Slate 900 */
+  padding: 20px;
+}
+
+/* Reusing the same card style as the login page */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  background-color: #1e293b; /* Slate 800 */
+  border-radius: 12px;
+  border: 1px solid #334155; /* Slate 700 */
+  color: #f8fafc; /* Slate 50 */
+  animation: scaleUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Re-using the animation */
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+/* Header section within the card */
+.auth-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.auth-header p {
+  color: #94a3b8; /* Slate 400 */
+  font-size: 16px;
+}
+
+/* Reusing the input group styling */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #cbd5e1; /* Slate 300 */
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #0f172a; /* Slate 900 */
+  border: 1px solid #475569; /* Slate 600 */
+  border-radius: 8px;
+  color: #f8fafc; /* Slate 50 */
+  font-size: 16px;
+  transition: all 0.2s ease-in-out;
+}
+
+.input-group input::placeholder {
+  color: #64748b; /* Slate 500 */
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #38bdf8; /* Sky 400 */
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* Primary button styling */
+.auth-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #38bdf8; /* Sky 400 */
+  color: #0f172a; /* Slate 900 */
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: 8px;
+}
+
+.auth-button:hover {
+  background-color: #7dd3fc; /* Sky 300 */
+  transform: translateY(-2px);
+}
+
+/* Link to the other auth page */
+.auth-link {
+  text-align: center;
+  margin-top: 32px;
+  color: #94a3b8; /* Slate 400 */
+}
+
+.auth-link a {
+  color: #38bdf8; /* Sky 400 */
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+  color: #7dd3fc; /* Sky 300 */
+}

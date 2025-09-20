@@ -1,0 +1,121 @@
+/* --- Styles for a reusable form in a dark theme --- */
+.product-form {
+  background-color: #1e293b; /* Slate 800 */
+  border: 1px solid #334155;  /* Slate 700 */
+  border-radius: 12px;
+  padding: 24px 32px;
+  animation: scaleUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #cbd5e1; /* Slate 300 */
+}
+
+/* --- THE FIX for "white text on white background" --- */
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #0f172a;      /* Dark background */
+  border: 1px solid #475569;      /* Subtle border */
+  border-radius: 8px;
+  color: #f8fafc;                /* White text */
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #38bdf8; /* Sky 400 */
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* Grid layout for smaller inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 24px;
+}
+
+/* --- Tag Input Styling --- */
+.tag-input-wrapper {
+  display: flex;
+  gap: 8px;
+}
+.tag-input-wrapper .form-input {
+  flex-grow: 1;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.tag-item {
+  display: flex;
+  align-items: center;
+  background-color: #334155; /* Slate 700 */
+  color: #e2e8f0; /* Slate 200 */
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.remove-tag-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  background-color: #475569;
+  color: #e2e8f0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.remove-tag-btn:hover {
+  background-color: #ef4444; /* Red 500 */
+}
+
+/* --- Form Actions (Buttons) --- */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+  border-top: 1px solid #334155;
+  padding-top: 24px;
+}
+
+/* Reusing button styles from the rest of the app */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.btn-primary { background-color: #ffc107; color: #0d47a1; }
+.btn-primary:hover { background-color: #ffca28; }
+.btn-secondary { background-color: #334155; color: #f8fafc; }
+.btn-secondary:hover { background-color: #475569; }

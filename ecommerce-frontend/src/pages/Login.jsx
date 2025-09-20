@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Login.css"; // Ensure this CSS file is linked
 
 function Login() {
   const navigate = useNavigate();
@@ -37,39 +38,41 @@ function Login() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-      <div className="card shadow-lg p-4" style={{ width: "400px" }}>
-        <h3 className="text-center mb-4">Welcome Back 👋</h3>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <h2>Sign In</h2>
+          <p>Welcome back, please enter your details.</p>
+        </div>
         <form onSubmit={handleLogin}>
-          <div className="mb-3">
-            <label className="form-label">Email</label>
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
             <input
+              id="email"
               type="email"
-              className="form-control rounded-pill"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
+              placeholder="name@company.com"
+              required
             />
           </div>
-          <div className="mb-3">
-            <label className="form-label">Password</label>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
             <input
+              id="password"
               type="password"
-              className="form-control rounded-pill"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
+              placeholder="Enter your password"
+              required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100 rounded-pill">
-            Login
+          <button type="submit" className="login-button">
+            Sign In
           </button>
         </form>
-        <p className="text-center mt-3">
-          Don’t have an account?{" "}
-          <a href="/signup" className="text-decoration-none">
-            Sign up
-          </a>
+        <p className="signup-link">
+          Don’t have an account? <a href="/signup">Sign up now</a>
         </p>
       </div>
     </div>
